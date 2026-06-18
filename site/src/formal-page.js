@@ -58,7 +58,7 @@ function renderCanonical(f) {
        <div><strong>policy g</strong> (decision): ${c.policy_blocks.join(', ')}</div>
        <div><strong>mechanism f</strong> (state update): ${c.mechanism_blocks.join(', ')}</div>
        <div><strong>boundary</strong> (exogenous): ${c.boundary_blocks.join(', ') || '—'}</div>
-       <div><strong>observable</strong> (y = C(x)): ${c.control_blocks.join(', ') || '—'}</div>
+       <div><strong>observable / control</strong> (y = C(x)): ${c.control_blocks.join(', ') || '—'}</div>
      </div>`;
 }
 

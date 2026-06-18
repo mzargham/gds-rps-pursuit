@@ -100,6 +100,10 @@ engagement = Mechanism(
     ),
     updates=[("BlueTeam", "active"), ("RedTeam", "active")],
 )
+# Control–observation duality: GDS's ControlAction is the output map y = C(x). The
+# map an external controller reads as its action is what an actor inside the model
+# reads as an observation — so this read-out block is named for the actor's view
+# (Observe) while carrying the controller's-view role (ControlAction).
 observe = ControlAction(
     name="Observe",
     interface=interface(forward_in=["Observed Poses"], forward_out=["Survivor Counts"]),
