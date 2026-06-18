@@ -9,11 +9,11 @@
     "red":  { "leader": { "type": "random", "seed": 11 }, "color": "#e74c3c" }
   },
   "assets": [
-    { "id": "b-rock-1",   "class": "rock",     "team": "blue", "x": 2.5,  "y": 3.0 },
-    { "id": "b-rock-2",   "class": "rock",     "team": "blue", "x": 5.0,  "y": 13.5 },
-    { "id": "b-scissors", "class": "scissors", "team": "blue", "x": 1.5,  "y": 9.0 },
-    { "id": "r-paper-1",  "class": "paper",    "team": "red",  "x": 13.5, "y": 5.5 },
-    { "id": "r-paper-2",  "class": "paper",    "team": "red",  "x": 11.0, "y": 14.0 },
-    { "id": "r-scissors", "class": "scissors", "team": "red",  "x": 14.5, "y": 10.0 }
+    { "id": "b-rock-1",   "class": "heavy",      "team": "blue", "x": 2.5,  "y": 3.0 },
+    { "id": "b-rock-2",   "class": "heavy",      "team": "blue", "x": 5.0,  "y": 13.5 },
+    { "id": "b-scissors", "class": "skirmisher", "team": "blue", "x": 1.5,  "y": 9.0 },
+    { "id": "r-paper-1",  "class": "balanced",   "team": "red",  "x": 13.5, "y": 5.5 },
+    { "id": "r-paper-2",  "class": "balanced",   "team": "red",  "x": 11.0, "y": 14.0 },
+    { "id": "r-scissors", "class": "skirmisher", "team": "red",  "x": 14.5, "y": 10.0 }
   ]
 }

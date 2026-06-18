@@ -108,23 +108,25 @@ class AssetClass:
 ENGAGE_FACTOR = 0.8
 
 
-# One class per type, deliberately asymmetric:
-#   rock     — heavy, long reach, strong sluggish chaser
-#   paper    — balanced
-#   scissors — light, twitchy, quickest to flee but short reach
+# Classes are named *kinematic profiles*, distinct from the RPS *type* they carry —
+# the ontology supports many classes per type; v1 ships one of each, deliberately
+# asymmetric:
+#   heavy (rock)         — long reach, strong but sluggish chaser, narrow strike
+#   balanced (paper)     — middle of the road
+#   skirmisher (scissors)— light, twitchy, quickest to flee, wide short-range strike
 CLASSES: dict[str, AssetClass] = {
-    "rock": AssetClass(
-        name="rock", type=AssetType.ROCK, damping=0.7,
+    "heavy": AssetClass(
+        name="heavy", type=AssetType.ROCK, damping=0.7,
         chase=2.0, flee=1.0, collision_radius=0.45,
         kill_radius=1.7, kill_half_angle=math.radians(32),
         attract_gain=0.9, repel_gain=1.0),
-    "paper": AssetClass(
-        name="paper", type=AssetType.PAPER, damping=0.85,
+    "balanced": AssetClass(
+        name="balanced", type=AssetType.PAPER, damping=0.85,
         chase=1.9, flee=0.9, collision_radius=0.34,
         kill_radius=1.5, kill_half_angle=math.radians(45),
         attract_gain=1.2, repel_gain=1.4),
-    "scissors": AssetClass(
-        name="scissors", type=AssetType.SCISSORS, damping=1.0,
+    "skirmisher": AssetClass(
+        name="skirmisher", type=AssetType.SCISSORS, damping=1.0,
         chase=1.8, flee=0.8, collision_radius=0.3,
         kill_radius=1.3, kill_half_angle=math.radians(58),
         attract_gain=1.5, repel_gain=1.7),

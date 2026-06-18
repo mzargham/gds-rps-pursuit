@@ -228,7 +228,7 @@
     ],
     "classes": [
       {
-        "name": "rock",
+        "name": "heavy",
         "type": "rock",
         "damping": 0.7,
         "chase": 2.0,
@@ -242,7 +242,7 @@
         "glyph": "R"
       },
       {
-        "name": "paper",
+        "name": "balanced",
         "type": "paper",
         "damping": 0.85,
         "chase": 1.9,
@@ -256,7 +256,7 @@
         "glyph": "P"
       },
       {
-        "name": "scissors",
+        "name": "skirmisher",
         "type": "scissors",
         "damping": 1.0,
         "chase": 1.8,

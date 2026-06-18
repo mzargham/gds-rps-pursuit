@@ -23,7 +23,7 @@
     {
       "id": "b-rock-1",
       "team": "blue",
-      "class": "rock",
+      "class": "heavy",
       "type": "rock",
       "glyph": "R",
       "collision_radius": 0.45,
@@ -33,7 +33,7 @@
     {
       "id": "b-rock-2",
       "team": "blue",
-      "class": "rock",
+      "class": "heavy",
       "type": "rock",
       "glyph": "R",
       "collision_radius": 0.45,
@@ -43,7 +43,7 @@
     {
       "id": "b-scissors",
       "team": "blue",
-      "class": "scissors",
+      "class": "skirmisher",
       "type": "scissors",
       "glyph": "S",
       "collision_radius": 0.3,
@@ -53,7 +53,7 @@
     {
       "id": "r-paper-1",
       "team": "red",
-      "class": "paper",
+      "class": "balanced",
       "type": "paper",
       "glyph": "P",
       "collision_radius": 0.34,
@@ -63,7 +63,7 @@
     {
       "id": "r-paper-2",
       "team": "red",
-      "class": "paper",
+      "class": "balanced",
       "type": "paper",
       "glyph": "P",
       "collision_radius": 0.34,
@@ -73,7 +73,7 @@
     {
       "id": "r-scissors",
       "team": "red",
-      "class": "scissors",
+      "class": "skirmisher",
       "type": "scissors",
       "glyph": "S",
       "collision_radius": 0.3,

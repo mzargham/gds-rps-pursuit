@@ -18,9 +18,9 @@ from ontology import Asset
 def make_roster() -> list[Asset]:
     # Blue rock chases red scissors; red scissors flees blue rock. A red paper too.
     return [
-        Asset(id="b0", class_name="rock", team="blue", x=2.0, y=2.0),
-        Asset(id="r0", class_name="scissors", team="red", x=6.0, y=6.0),
-        Asset(id="r1", class_name="paper", team="red", x=9.0, y=3.0),
+        Asset(id="b0", class_name="heavy", team="blue", x=2.0, y=2.0),
+        Asset(id="r0", class_name="skirmisher", team="red", x=6.0, y=6.0),
+        Asset(id="r1", class_name="balanced", team="red", x=9.0, y=3.0),
     ]
 
 
@@ -86,8 +86,8 @@ def test_repelled_by_predator():
 def test_inactive_asset_has_no_control_and_no_influence():
     """active_i = 0 ⇒ asset i applies no control AND exerts no force on others."""
     assets = [
-        Asset(id="b0", class_name="rock", team="blue", x=2.0, y=2.0),
-        Asset(id="r0", class_name="scissors", team="red", x=3.0, y=3.0),
+        Asset(id="b0", class_name="heavy", team="blue", x=2.0, y=2.0),
+        Asset(id="r0", class_name="skirmisher", team="red", x=3.0, y=3.0),
     ]
     dyn = Dynamics(assets)
     y = [2, 2, 0, 0, 3, 3, 0, 0]
@@ -112,8 +112,8 @@ def test_inactive_asset_has_no_control_and_no_influence():
 def test_corpse_still_emits_personal_space_repulsion():
     """Under full observability a corpse is visible, so it is still avoided."""
     assets = [
-        Asset(id="b0", class_name="rock", team="blue", x=2.0, y=2.0),
-        Asset(id="r0", class_name="scissors", team="red", x=3.0, y=3.0),
+        Asset(id="b0", class_name="heavy", team="blue", x=2.0, y=2.0),
+        Asset(id="r0", class_name="skirmisher", team="red", x=3.0, y=3.0),
     ]
     dyn = Dynamics(assets)
     assets[0].active = 0          # b0 is a corpse
