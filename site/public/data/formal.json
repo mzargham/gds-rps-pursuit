@@ -13,7 +13,8 @@
       "role": "BoundaryAction",
       "forward_in": [],
       "forward_out": [
-        "World State"
+        "Blue World State",
+        "Red World State"
       ],
       "updates": []
     },
@@ -21,7 +22,7 @@
       "name": "Blue Leader",
       "role": "Policy",
       "forward_in": [
-        "World State"
+        "Blue World State"
       ],
       "forward_out": [
         "Blue Task Weights"
@@ -32,7 +33,7 @@
       "name": "Red Leader",
       "role": "Policy",
       "forward_in": [
-        "World State"
+        "Red World State"
       ],
       "forward_out": [
         "Red Task Weights"
@@ -47,7 +48,8 @@
         "Red Task Weights"
       ],
       "forward_out": [
-        "Updated Poses"
+        "Engaged Poses",
+        "Observed Poses"
       ],
       "updates": [
         [
@@ -72,10 +74,11 @@
       "name": "Engagement",
       "role": "Mechanism",
       "forward_in": [
-        "Updated Poses"
+        "Engaged Poses"
       ],
       "forward_out": [
-        "World State"
+        "Blue World State",
+        "Red World State"
       ],
       "updates": [
         [
@@ -92,7 +95,7 @@
       "name": "Observe",
       "role": "ControlAction",
       "forward_in": [
-        "Updated Poses"
+        "Observed Poses"
       ],
       "forward_out": [
         "Survivor Counts"

@@ -62,23 +62,29 @@ red_team = entity(
 # ---------------------------------------------------------------------------
 # Blocks (the four GDS roles)
 # ---------------------------------------------------------------------------
+# NOTE on wiring: gds-core auto-wires by full-port-name token overlap, and resolves a
+# target port name to the FIRST block that declares it. So two parallel branches must
+# NOT share an input port name, or both wires collapse onto the first branch (orphaning
+# the second). We therefore give each consumer its own distinctly-named channel: Spawn
+# and Engagement emit a per-leader world-state copy, and Motion emits a per-consumer
+# pose copy. Exact-name matches → unambiguous one-to-one wiring.
 spawn = BoundaryAction(
     name="Spawn",
-    interface=interface(forward_out=["World State"]),
+    interface=interface(forward_out=["Blue World State", "Red World State"]),
 )
 blue_leader = Policy(
     name="Blue Leader",
-    interface=interface(forward_in=["World State"], forward_out=["Blue Task Weights"]),
+    interface=interface(forward_in=["Blue World State"], forward_out=["Blue Task Weights"]),
 )
 red_leader = Policy(
     name="Red Leader",
-    interface=interface(forward_in=["World State"], forward_out=["Red Task Weights"]),
+    interface=interface(forward_in=["Red World State"], forward_out=["Red Task Weights"]),
 )
 motion = Mechanism(
     name="Motion",
     interface=interface(
         forward_in=["Blue Task Weights", "Red Task Weights"],
-        forward_out=["Updated Poses"],
+        forward_out=["Engaged Poses", "Observed Poses"],
     ),
     updates=[
         ("BlueTeam", "position"), ("BlueTeam", "velocity"),
@@ -88,12 +94,15 @@ motion = Mechanism(
 )
 engagement = Mechanism(
     name="Engagement",
-    interface=interface(forward_in=["Updated Poses"], forward_out=["World State"]),
+    interface=interface(
+        forward_in=["Engaged Poses"],
+        forward_out=["Blue World State", "Red World State"],  # fed back to the leaders
+    ),
     updates=[("BlueTeam", "active"), ("RedTeam", "active")],
 )
 observe = ControlAction(
     name="Observe",
-    interface=interface(forward_in=["Updated Poses"], forward_out=["Survivor Counts"]),
+    interface=interface(forward_in=["Observed Poses"], forward_out=["Survivor Counts"]),
 )
 
 
@@ -101,11 +110,11 @@ def build_system():
     """Compose the roles into the GDS system (with the temporal loop)."""
     core = spawn >> (blue_leader | red_leader) >> motion >> (engagement | observe)
     loop = core.loop([
-        Wiring(source_block="Engagement", source_port="World State",
-               target_block="Blue Leader", target_port="World State",
+        Wiring(source_block="Engagement", source_port="Blue World State",
+               target_block="Blue Leader", target_port="Blue World State",
                direction=FlowDirection.COVARIANT),
-        Wiring(source_block="Engagement", source_port="World State",
-               target_block="Red Leader", target_port="World State",
+        Wiring(source_block="Engagement", source_port="Red World State",
+               target_block="Red Leader", target_port="Red World State",
                direction=FlowDirection.COVARIANT),
     ])
     return compile_system("rps_pursuit", loop)
