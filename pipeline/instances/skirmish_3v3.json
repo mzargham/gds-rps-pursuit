@@ -1,0 +1,19 @@
+{
+  "name": "skirmish_3v3",
+  "description": "A 3v3 skirmish with asymmetric starting positions and three distinct asset classes (rock is a heavy long-reach chaser, scissors is light and twitchy, paper is balanced). Attackers engage from a stand-off distance and strike with a directional kill cone; assets keep personal space from non-targets; a tighter body collision destroys both actors, and destroyed assets linger as hazards. Blue fields two rocks and a scissors under a greedy leader; Red fields two papers and a scissors under a seeded random leader.",
+  "arena": { "W": 16.0, "H": 16.0 },
+  "field": { "k_wall": 0.8, "wall_w": 1.0 },
+  "run": { "cadence": 0.4, "sample_dt": 0.05, "t_max": 50.0 },
+  "teams": {
+    "blue": { "leader": "greedy", "color": "#4a90d9" },
+    "red":  { "leader": { "type": "random", "seed": 11 }, "color": "#e74c3c" }
+  },
+  "assets": [
+    { "id": "b-rock-1",   "class": "rock",     "team": "blue", "x": 2.5,  "y": 3.0 },
+    { "id": "b-rock-2",   "class": "rock",     "team": "blue", "x": 5.0,  "y": 13.5 },
+    { "id": "b-scissors", "class": "scissors", "team": "blue", "x": 1.5,  "y": 9.0 },
+    { "id": "r-paper-1",  "class": "paper",    "team": "red",  "x": 13.5, "y": 5.5 },
+    { "id": "r-paper-2",  "class": "paper",    "team": "red",  "x": 11.0, "y": 14.0 },
+    { "id": "r-scissors", "class": "scissors", "team": "red",  "x": 14.5, "y": 10.0 }
+  ]
+}

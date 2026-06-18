@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Node / Vite
+node_modules/
+dist/
+
+# Generated pipeline artifacts (the canonical copies live in site/public/data/)
+pipeline/output/
+
+# OS
+.DS_Store

@@ -1,0 +1,33 @@
+[project]
+name = "gds-rps-pursuit-pipeline"
+version = "0.1.0"
+description = "Data-generation pipeline for the gds-rps-pursuit demonstration (symbolic GDS spec bound to simulation)"
+requires-python = ">=3.12"
+dependencies = [
+    "gds-framework>=0.2.3",
+    "gds-viz>=0.1.2",
+    "gds-continuous[scipy]>=0.1.0",
+    "sympy>=1.13",
+    "numpy>=1.26",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+# Run as a collection of scripts, not an installable package.
+[tool.uv]
+package = false
+
+# Resolve the GDS packages from the sibling gds-core checkout (editable),
+# so local changes are picked up and we don't depend on a PyPI release.
+[tool.uv.sources]
+gds-framework = { path = "../../gds-core/packages/gds-framework", editable = true }
+gds-viz = { path = "../../gds-core/packages/gds-viz", editable = true }
+gds-continuous = { path = "../../gds-core/packages/gds-continuous", editable = true }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 88

@@ -1,0 +1,279 @@
+{
+  "title": "Formal Structure",
+  "description": "The same pursuit-evasion system viewed as a Generalized Dynamical System: h = f\u2218g, with leaders as the policy g and Motion+Engagement as the mechanism f.",
+  "verification": {
+    "errors": 0,
+    "warnings": 0,
+    "checks_passed": 29,
+    "checks_total": 29
+  },
+  "blocks": [
+    {
+      "name": "Spawn",
+      "role": "BoundaryAction",
+      "forward_in": [],
+      "forward_out": [
+        "World State"
+      ],
+      "updates": []
+    },
+    {
+      "name": "Blue Leader",
+      "role": "Policy",
+      "forward_in": [
+        "World State"
+      ],
+      "forward_out": [
+        "Blue Task Weights"
+      ],
+      "updates": []
+    },
+    {
+      "name": "Red Leader",
+      "role": "Policy",
+      "forward_in": [
+        "World State"
+      ],
+      "forward_out": [
+        "Red Task Weights"
+      ],
+      "updates": []
+    },
+    {
+      "name": "Motion",
+      "role": "Mechanism",
+      "forward_in": [
+        "Blue Task Weights",
+        "Red Task Weights"
+      ],
+      "forward_out": [
+        "Updated Poses"
+      ],
+      "updates": [
+        [
+          "BlueTeam",
+          "position"
+        ],
+        [
+          "BlueTeam",
+          "velocity"
+        ],
+        [
+          "RedTeam",
+          "position"
+        ],
+        [
+          "RedTeam",
+          "velocity"
+        ]
+      ]
+    },
+    {
+      "name": "Engagement",
+      "role": "Mechanism",
+      "forward_in": [
+        "Updated Poses"
+      ],
+      "forward_out": [
+        "World State"
+      ],
+      "updates": [
+        [
+          "BlueTeam",
+          "active"
+        ],
+        [
+          "RedTeam",
+          "active"
+        ]
+      ]
+    },
+    {
+      "name": "Observe",
+      "role": "ControlAction",
+      "forward_in": [
+        "Updated Poses"
+      ],
+      "forward_out": [
+        "Survivor Counts"
+      ],
+      "updates": []
+    }
+  ],
+  "canonical": {
+    "policy_blocks": [
+      "Blue Leader",
+      "Red Leader"
+    ],
+    "mechanism_blocks": [
+      "Motion",
+      "Engagement"
+    ],
+    "boundary_blocks": [
+      "Spawn"
+    ],
+    "control_blocks": [
+      "Observe"
+    ],
+    "state_variables": [
+      [
+        "BlueTeam",
+        "position"
+      ],
+      [
+        "BlueTeam",
+        "velocity"
+      ],
+      [
+        "BlueTeam",
+        "active"
+      ],
+      [
+        "RedTeam",
+        "position"
+      ],
+      [
+        "RedTeam",
+        "velocity"
+      ],
+      [
+        "RedTeam",
+        "active"
+      ]
+    ],
+    "update_map": [
+      [
+        "Motion",
+        [
+          [
+            "BlueTeam",
+            "position"
+          ],
+          [
+            "BlueTeam",
+            "velocity"
+          ],
+          [
+            "RedTeam",
+            "position"
+          ],
+          [
+            "RedTeam",
+            "velocity"
+          ]
+        ]
+      ],
+      [
+        "Engagement",
+        [
+          [
+            "BlueTeam",
+            "active"
+          ],
+          [
+            "RedTeam",
+            "active"
+          ]
+        ]
+      ]
+    ]
+  },
+  "symbolic": {
+    "n_assets": 6,
+    "potential_latex": "\\frac{active_{1} k_{a 0} w_{0 1} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{1}\\right)^{2} + \\left(y_{0} - y_{1}\\right)^{2}}\\right)^{2}}{2} + \\frac{active_{2} k_{a 0} w_{0 2} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{2}\\right)^{2} + \\left(y_{0} - y_{2}\\right)^{2}}\\right)^{2}}{2} + \\frac{active_{3} k_{a 0} w_{0 3} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{3}\\right)^{2} + \\left(y_{0} - y_{3}\\right)^{2}}\\right)^{2}}{2} + \\frac{active_{4} k_{a 0} w_{0 4} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{4}\\right)^{2} + \\left(y_{0} - y_{4}\\right)^{2}}\\right)^{2}}{2} + \\frac{active_{5} k_{a 0} w_{0 5} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{5}\\right)^{2} + \\left(y_{0} - y_{5}\\right)^{2}}\\right)^{2}}{2} + \\frac{k_{space} \\left(1 - w_{0 1}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{1}\\right)^{2} + \\left(y_{0} - y_{1}\\right)^{2}}} + \\frac{k_{space} \\left(1 - w_{0 2}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{2}\\right)^{2} + \\left(y_{0} - y_{2}\\right)^{2}}} + \\frac{k_{space} \\left(1 - w_{0 5}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{5}\\right)^{2} + \\left(y_{0} - y_{5}\\right)^{2}}} + k_{wall} \\left(e^{\\frac{- H + y_{0}}{wall_{w}}} + e^{- \\frac{y_{0}}{wall_{w}}}\\right) + k_{wall} \\left(e^{\\frac{- W + x_{0}}{wall_{w}}} + e^{- \\frac{x_{0}}{wall_{w}}}\\right) + \\frac{active_{3} k_{r 0} + k_{space} \\left(1 - w_{0 3}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{3}\\right)^{2} + \\left(y_{0} - y_{3}\\right)^{2}}} + \\frac{active_{4} k_{r 0} + k_{space} \\left(1 - w_{0 4}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{4}\\right)^{2} + \\left(y_{0} - y_{4}\\right)^{2}}}",
+    "accel_latex": {
+      "dvx": "- \\frac{active_{1} k_{a 0} w_{0 1} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{1}\\right)^{2} + \\left(y_{0} - y_{1}\\right)^{2}}\\right) \\left(x_{0} - x_{1}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{1}\\right)^{2} + \\left(y_{0} - y_{1}\\right)^{2}}} - \\frac{active_{2} k_{a 0} w_{0 2} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{2}\\right)^{2} + \\left(y_{0} - y_{2}\\right)^{2}}\\right) \\left(x_{0} - x_{2}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{2}\\right)^{2} + \\left(y_{0} - y_{2}\\right)^{2}}} - \\frac{active_{3} k_{a 0} w_{0 3} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{3}\\right)^{2} + \\left(y_{0} - y_{3}\\right)^{2}}\\right) \\left(x_{0} - x_{3}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{3}\\right)^{2} + \\left(y_{0} - y_{3}\\right)^{2}}} - \\frac{active_{4} k_{a 0} w_{0 4} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{4}\\right)^{2} + \\left(y_{0} - y_{4}\\right)^{2}}\\right) \\left(x_{0} - x_{4}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{4}\\right)^{2} + \\left(y_{0} - y_{4}\\right)^{2}}} - \\frac{active_{5} k_{a 0} w_{0 5} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{5}\\right)^{2} + \\left(y_{0} - y_{5}\\right)^{2}}\\right) \\left(x_{0} - x_{5}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{5}\\right)^{2} + \\left(y_{0} - y_{5}\\right)^{2}}} - \\frac{k_{space} \\left(1 - w_{0 1}\\right) \\left(- x_{0} + x_{1}\\right)}{\\left(eps + \\left(x_{0} - x_{1}\\right)^{2} + \\left(y_{0} - y_{1}\\right)^{2}\\right)^{\\frac{3}{2}}} - \\frac{k_{space} \\left(1 - w_{0 2}\\right) \\left(- x_{0} + x_{2}\\right)}{\\left(eps + \\left(x_{0} - x_{2}\\right)^{2} + \\left(y_{0} - y_{2}\\right)^{2}\\right)^{\\frac{3}{2}}} - \\frac{k_{space} \\left(1 - w_{0 5}\\right) \\left(- x_{0} + x_{5}\\right)}{\\left(eps + \\left(x_{0} - x_{5}\\right)^{2} + \\left(y_{0} - y_{5}\\right)^{2}\\right)^{\\frac{3}{2}}} - k_{wall} \\left(\\frac{e^{\\frac{- W + x_{0}}{wall_{w}}}}{wall_{w}} - \\frac{e^{- \\frac{x_{0}}{wall_{w}}}}{wall_{w}}\\right) - \\frac{\\left(- x_{0} + x_{3}\\right) \\left(active_{3} k_{r 0} + k_{space} \\left(1 - w_{0 3}\\right)\\right)}{\\left(eps + \\left(x_{0} - x_{3}\\right)^{2} + \\left(y_{0} - y_{3}\\right)^{2}\\right)^{\\frac{3}{2}}} - \\frac{\\left(- x_{0} + x_{4}\\right) \\left(active_{4} k_{r 0} + k_{space} \\left(1 - w_{0 4}\\right)\\right)}{\\left(eps + \\left(x_{0} - x_{4}\\right)^{2} + \\left(y_{0} - y_{4}\\right)^{2}\\right)^{\\frac{3}{2}}}",
+      "dvy": "- \\frac{active_{1} k_{a 0} w_{0 1} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{1}\\right)^{2} + \\left(y_{0} - y_{1}\\right)^{2}}\\right) \\left(y_{0} - y_{1}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{1}\\right)^{2} + \\left(y_{0} - y_{1}\\right)^{2}}} - \\frac{active_{2} k_{a 0} w_{0 2} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{2}\\right)^{2} + \\left(y_{0} - y_{2}\\right)^{2}}\\right) \\left(y_{0} - y_{2}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{2}\\right)^{2} + \\left(y_{0} - y_{2}\\right)^{2}}} - \\frac{active_{3} k_{a 0} w_{0 3} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{3}\\right)^{2} + \\left(y_{0} - y_{3}\\right)^{2}}\\right) \\left(y_{0} - y_{3}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{3}\\right)^{2} + \\left(y_{0} - y_{3}\\right)^{2}}} - \\frac{active_{4} k_{a 0} w_{0 4} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{4}\\right)^{2} + \\left(y_{0} - y_{4}\\right)^{2}}\\right) \\left(y_{0} - y_{4}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{4}\\right)^{2} + \\left(y_{0} - y_{4}\\right)^{2}}} - \\frac{active_{5} k_{a 0} w_{0 5} \\left(- r_{0 0} + \\sqrt{eps + \\left(x_{0} - x_{5}\\right)^{2} + \\left(y_{0} - y_{5}\\right)^{2}}\\right) \\left(y_{0} - y_{5}\\right)}{\\sqrt{eps + \\left(x_{0} - x_{5}\\right)^{2} + \\left(y_{0} - y_{5}\\right)^{2}}} - \\frac{k_{space} \\left(1 - w_{0 1}\\right) \\left(- y_{0} + y_{1}\\right)}{\\left(eps + \\left(x_{0} - x_{1}\\right)^{2} + \\left(y_{0} - y_{1}\\right)^{2}\\right)^{\\frac{3}{2}}} - \\frac{k_{space} \\left(1 - w_{0 2}\\right) \\left(- y_{0} + y_{2}\\right)}{\\left(eps + \\left(x_{0} - x_{2}\\right)^{2} + \\left(y_{0} - y_{2}\\right)^{2}\\right)^{\\frac{3}{2}}} - \\frac{k_{space} \\left(1 - w_{0 5}\\right) \\left(- y_{0} + y_{5}\\right)}{\\left(eps + \\left(x_{0} - x_{5}\\right)^{2} + \\left(y_{0} - y_{5}\\right)^{2}\\right)^{\\frac{3}{2}}} - k_{wall} \\left(\\frac{e^{\\frac{- H + y_{0}}{wall_{w}}}}{wall_{w}} - \\frac{e^{- \\frac{y_{0}}{wall_{w}}}}{wall_{w}}\\right) - \\frac{\\left(- y_{0} + y_{3}\\right) \\left(active_{3} k_{r 0} + k_{space} \\left(1 - w_{0 3}\\right)\\right)}{\\left(eps + \\left(x_{0} - x_{3}\\right)^{2} + \\left(y_{0} - y_{3}\\right)^{2}\\right)^{\\frac{3}{2}}} - \\frac{\\left(- y_{0} + y_{4}\\right) \\left(active_{4} k_{r 0} + k_{space} \\left(1 - w_{0 4}\\right)\\right)}{\\left(eps + \\left(x_{0} - x_{4}\\right)^{2} + \\left(y_{0} - y_{4}\\right)^{2}\\right)^{\\frac{3}{2}}}"
+    },
+    "param_names": [
+      "k_a",
+      "k_r",
+      "c",
+      "F_chase",
+      "F_flee",
+      "r0",
+      "eps",
+      "F_wall",
+      "k_wall",
+      "wall_w",
+      "k_space",
+      "W",
+      "H"
+    ],
+    "note": "The Motion mechanism f is this symbolic potential field. It is lambdified exactly once; discrete engagements only flip the parameters active_i (admissible-action gate) and w_ij (task weight). The gains k_a, k_r, c, F_chase, F_flee are per-asset, read from each asset's class \u2014 so the three RPS types move differently."
+  },
+  "ontology": {
+    "types": [
+      {
+        "name": "rock",
+        "letter": "R",
+        "beats": "scissors",
+        "beaten_by": "paper"
+      },
+      {
+        "name": "paper",
+        "letter": "P",
+        "beats": "rock",
+        "beaten_by": "scissors"
+      },
+      {
+        "name": "scissors",
+        "letter": "S",
+        "beats": "paper",
+        "beaten_by": "rock"
+      }
+    ],
+    "classes": [
+      {
+        "name": "rock",
+        "type": "rock",
+        "damping": 0.7,
+        "chase": 2.0,
+        "flee": 1.0,
+        "collision_radius": 0.45,
+        "kill_radius": 1.7,
+        "kill_angle_deg": 32,
+        "engage_radius": 1.36,
+        "attract_gain": 0.9,
+        "repel_gain": 1.0,
+        "glyph": "R"
+      },
+      {
+        "name": "paper",
+        "type": "paper",
+        "damping": 0.85,
+        "chase": 1.9,
+        "flee": 0.9,
+        "collision_radius": 0.34,
+        "kill_radius": 1.5,
+        "kill_angle_deg": 45,
+        "engage_radius": 1.2,
+        "attract_gain": 1.2,
+        "repel_gain": 1.4,
+        "glyph": "P"
+      },
+      {
+        "name": "scissors",
+        "type": "scissors",
+        "damping": 1.0,
+        "chase": 1.8,
+        "flee": 0.8,
+        "collision_radius": 0.3,
+        "kill_radius": 1.3,
+        "kill_angle_deg": 58,
+        "engage_radius": 1.04,
+        "attract_gain": 1.5,
+        "repel_gain": 1.7,
+        "glyph": "S"
+      }
+    ],
+    "admissibility_note": "Each asset carries an admissible-action gate active_i in {0,1}. On a losing engagement the gate collapses to 0 (admissible action space = empty set): the asset applies no control thereafter.",
+    "interaction_rules": [
+      "Kill cone (RPS): an attacker destroys a prey-type enemy that lies within its kill_radius AND within kill_half_angle of its heading. Directional \u2014 the attacker must be facing (and moving toward) the prey.",
+      "Stand-off engagement: an attacker is pulled to engage_radius (\u22480.8\u00b7kill_radius) from its target, not to contact \u2014 it strikes from cone reach and decelerates, so it usually survives the kill instead of ramming the fresh corpse.",
+      "Collision: two asset bodies overlapping (distance <= sum of collision_radii) are BOTH destroyed \u2014 independent of type or team. This also resolves same-type standoffs.",
+      "Hazard: a destroyed asset is a hazard; a live asset whose body overlaps a corpse is destroyed (the corpse persists).",
+      "Personal space: a short-range repulsion from every visible body (alive OR corpse) except an asset's assigned target. Because we assume full observability, corpses are visible and so are avoided \u2014 this is the collision-avoidance drive that also steers assets around hazards. (A destroyed asset still REPELS, but no longer THREATENS: its predator-flee contribution is gated off.)"
+    ]
+  }
+}

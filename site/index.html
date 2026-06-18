@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>gds-rps-pursuit — arena</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <nav class="top">
+      <span class="brand">gds-rps-pursuit</span>
+      <a href="./index.html" class="active">arena</a>
+      <a href="./formal.html">formal structure</a>
+      <a href="./stats.html">analysis</a>
+    </nav>
+
+    <div class="wrap">
+      <h1>Rock-paper-scissors pursuit-evasion</h1>
+      <p class="lede">
+        A toy two-team adversarial dynamic game built on the Generalized Dynamical
+        Systems formalism. Each asset is a rock, paper, or scissors; team leaders
+        assign tasks; assets move under one symbolic energy field; contact resolves
+        by rock-paper-scissors. This is a replay of a single recorded match.
+      </p>
+      <p class="disclaimer">
+        Demonstration only — a toy world illustrating the GDS methodology (a
+        simulation generated directly from a symbolic spec), not a realistic or
+        solved pursuit model. See the
+        <a href="./formal.html">formal structure</a> page and the README for the
+        simplifying assumptions.
+      </p>
+
+      <div class="arena-stage">
+        <canvas id="arena" width="560" height="560"></canvas>
+        <div class="scoreboard">
+          <span class="blue" id="blueScore">BLUE</span>
+          <span class="red" id="redScore">RED</span>
+          <span class="outcome" id="outcome"></span>
+        </div>
+        <div class="controls">
+          <button id="play">▶ play</button>
+          <button id="stepB">⟨ step</button>
+          <button id="stepF">step ⟩</button>
+          <button id="reset">⟲ reset</button>
+          <span class="readout" id="tReadout">t = 0.0s</span>
+          <input type="range" id="scrub" min="0" max="0" value="0" />
+          <label>speed
+            <select id="speed">
+              <option value="0.5">0.5×</option>
+              <option value="1" selected>1×</option>
+              <option value="2">2×</option>
+              <option value="4">4×</option>
+            </select>
+          </label>
+        </div>
+        <p class="legend">
+          circle = body (collision radius) · wedge = kill cone (attacker's strike
+          zone, from heading) · faded = destroyed (avoided, still a hazard)
+        </p>
+        <p class="legend">
+          flash:
+          <span style="color:#d4a017">● kill-cone strike</span> &nbsp;
+          <span style="color:#4ac3ff">● collision (both destroyed)</span> &nbsp;
+          <span style="color:#a86ed2">● corpse hazard</span>
+        </p>
+      </div>
+
+      <h2>Surviving assets over time</h2>
+      <div id="survChart"></div>
+      <p class="legend" id="instanceNote"></p>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

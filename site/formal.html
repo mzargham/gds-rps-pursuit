@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>gds-rps-pursuit — formal structure</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  </head>
+  <body>
+    <nav class="top">
+      <span class="brand">gds-rps-pursuit</span>
+      <a href="./index.html">arena</a>
+      <a href="./formal.html" class="active">formal structure</a>
+      <a href="./stats.html">analysis</a>
+    </nav>
+
+    <div class="wrap">
+      <h1>Formal structure</h1>
+      <p class="lede">
+        The same game viewed as a Generalized Dynamical System. The leaders are the
+        policy <code>g</code>; Motion and Engagement are the mechanism <code>f</code>;
+        the decomposition <code>h = f∘g</code> is derived, not asserted. Crucially,
+        the Motion mechanism's behaviour <em>is</em> the symbolic field below — it is
+        lambdified exactly once, so the simulation you watched on the
+        <a href="./index.html">arena</a> page provably reflects this formalism.
+      </p>
+
+      <div class="card" id="verifyCard"></div>
+
+      <h2>The symbolic vector field (single source of truth)</h2>
+      <p class="legend" id="symNote"></p>
+      <div class="math" id="potential"></div>
+      <div class="math" id="accel"></div>
+      <p class="legend" id="paramList"></p>
+
+      <h2>Canonical decomposition <code>h = f∘g</code></h2>
+      <div id="canonical"></div>
+
+      <h2>GDS diagrams</h2>
+      <div id="diagrams"></div>
+
+      <h2>Block roles</h2>
+      <div id="rolesTable"></div>
+
+      <h2>Asset ontology</h2>
+      <div id="ontology"></div>
+    </div>
+
+    <script type="module" src="./src/formal-page.js"></script>
+  </body>
+</html>

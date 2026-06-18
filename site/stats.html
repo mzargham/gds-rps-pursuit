@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>gds-rps-pursuit — analysis</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <nav class="top">
+      <span class="brand">gds-rps-pursuit</span>
+      <a href="./index.html">arena</a>
+      <a href="./formal.html">formal structure</a>
+      <a href="./stats.html" class="active">analysis</a>
+    </nav>
+
+    <div class="wrap">
+      <h1>Analysis — tuning a model you can measure</h1>
+      <p class="lede" id="intro"></p>
+      <p class="disclaimer">
+        These are aggregate statistics over many randomized runs of the toy model —
+        illustrating the <em>method</em> (measure, don't guess), not a claim about
+        real pursuit tactics.
+      </p>
+
+      <h2>The headline: kill-and-survive, by measurement</h2>
+      <div class="card" id="takeaway"></div>
+
+      <h2>Tuning sweep: stand-off distance × kill-cone reach</h2>
+      <p class="legend" id="sweepNote"></p>
+      <div id="sweepChart"></div>
+      <div id="sweepTable"></div>
+
+      <h2>Outcome distribution (randomized initial conditions)</h2>
+      <p class="legend" id="outcomeNote"></p>
+      <div id="outcomeChart"></div>
+
+      <h2>How long do matches last?</h2>
+      <div id="durationChart"></div>
+
+      <h2>What ends assets? (events per match)</h2>
+      <div id="eventChart"></div>
+
+      <h2>Does the leader policy matter?</h2>
+      <p class="legend" id="leaderNote"></p>
+      <div id="leaderChart"></div>
+    </div>
+
+    <script type="module" src="./src/stats-page.js"></script>
+  </body>
+</html>

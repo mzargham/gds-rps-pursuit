@@ -1,0 +1,141 @@
+{
+  "title": "Analysis",
+  "intro": "Because the simulation is generated from the symbolic spec, every design choice is testable: we run the model hundreds of times and measure the outcome distribution rather than arguing about it. This page reproduces, at small scale, the analysis used to tune the model \u2014 the same loop that turned a brittle prototype into the match on the arena page.",
+  "headline": {
+    "n": 40,
+    "outcomes": {
+      "timeout": 8,
+      "blue": 23,
+      "red": 9
+    },
+    "mean_duration": 9.77,
+    "mean_spread": 2.42,
+    "durations": [
+      25.0,
+      5.6,
+      25.0,
+      4.0,
+      8.4,
+      6.0,
+      25.0,
+      6.4,
+      5.6,
+      6.8,
+      6.4,
+      6.4,
+      6.0,
+      4.8,
+      6.0,
+      7.6,
+      6.0,
+      5.6,
+      5.2,
+      4.4,
+      6.0,
+      5.6,
+      6.4,
+      5.2,
+      25.0,
+      25.0,
+      6.4,
+      25.0,
+      6.0,
+      25.0,
+      6.0,
+      6.4,
+      6.0,
+      4.4,
+      4.8,
+      9.6,
+      4.0,
+      6.8,
+      25.0,
+      6.0
+    ],
+    "event_mix": {
+      "rps": 1.93,
+      "hazard": 1.98,
+      "collision": 0.42
+    },
+    "self_elim_pct": 32
+  },
+  "tuning_sweep": {
+    "n": 12,
+    "grid": [
+      {
+        "engage_factor": 0.0,
+        "kill_mult": 1.0,
+        "self_elim_pct": 42,
+        "decisive_pct": 58,
+        "draw_pct": 42
+      },
+      {
+        "engage_factor": 0.0,
+        "kill_mult": 1.3,
+        "self_elim_pct": 29,
+        "decisive_pct": 50,
+        "draw_pct": 50
+      },
+      {
+        "engage_factor": 0.4,
+        "kill_mult": 1.0,
+        "self_elim_pct": 44,
+        "decisive_pct": 58,
+        "draw_pct": 42
+      },
+      {
+        "engage_factor": 0.4,
+        "kill_mult": 1.3,
+        "self_elim_pct": 28,
+        "decisive_pct": 50,
+        "draw_pct": 50
+      },
+      {
+        "engage_factor": 0.8,
+        "kill_mult": 1.0,
+        "self_elim_pct": 35,
+        "decisive_pct": 75,
+        "draw_pct": 25
+      },
+      {
+        "engage_factor": 0.8,
+        "kill_mult": 1.3,
+        "self_elim_pct": 20,
+        "decisive_pct": 67,
+        "draw_pct": 33
+      }
+    ]
+  },
+  "tuning_takeaway": {
+    "naive_self_elim_pct": 42,
+    "tuned_self_elim_pct": 20,
+    "tuned_decisive_pct": 67,
+    "text": "Symptom: attackers killed their prey and then rammed the fresh corpse \u2014 the kill-cone striker self-eliminated 42% of the time. Lengthening the kill cone alone cut that but collapsed matches into mutual-annihilation draws. Adding a stand-off engagement distance (strike from cone reach, don't ram) and a modest reach increase together dropped self-elimination to 20% while keeping 67% of matches decisive. We measured each lever instead of guessing."
+  },
+  "leaders": {
+    "n": 20,
+    "matchups": [
+      {
+        "blue": "greedy",
+        "red": "greedy",
+        "blue_win_pct": 45,
+        "red_win_pct": 10,
+        "stalemate_pct": 45
+      },
+      {
+        "blue": "greedy",
+        "red": "random",
+        "blue_win_pct": 75,
+        "red_win_pct": 10,
+        "stalemate_pct": 15
+      },
+      {
+        "blue": "random",
+        "red": "random",
+        "blue_win_pct": 45,
+        "red_win_pct": 40,
+        "stalemate_pct": 15
+      }
+    ]
+  }
+}
