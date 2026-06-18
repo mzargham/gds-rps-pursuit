@@ -1,6 +1,7 @@
 /** Canvas renderer for a recorded match: assets as team-colored R/P/S glyphs. */
 
 const TEAM_FALLBACK = { blue: '#4a90d9', red: '#e74c3c' };
+const HAZARD = '#a86ed2'; // corpse / hazard purple (matches the legend + hazard flash)
 
 export function createArena(canvas, match) {
   const ctx = canvas.getContext('2d');
@@ -78,18 +79,19 @@ export function createArena(canvas, match) {
       // body radius = collision_radius (1:1 with the physics: two bodies
       // touching is exactly a collision)
       const rAsset = (meta.collision_radius || 0.4) * scale;
-      ctx.globalAlpha = alive ? 1 : 0.22;
+      // a corpse is a team-neutral hazard, drawn in the hazard purple
+      ctx.globalAlpha = alive ? 1 : 0.6;
 
       ctx.beginPath();
       ctx.arc(sx(a.x), sy(a.y), rAsset, 0, Math.PI * 2);
-      ctx.fillStyle = teamColor(meta.team);
+      ctx.fillStyle = alive ? teamColor(meta.team) : HAZARD;
       ctx.fill();
       ctx.lineWidth = 2 * dpr;
-      ctx.strokeStyle = 'rgba(0,0,0,0.35)';
+      ctx.strokeStyle = alive ? 'rgba(0,0,0,0.35)' : 'rgba(90,40,120,0.7)';
       ctx.stroke();
 
       // glyph
-      ctx.globalAlpha = alive ? 1 : 0.35;
+      ctx.globalAlpha = alive ? 1 : 0.75;
       ctx.fillStyle = '#fff';
       ctx.font = `bold ${Math.round(rAsset * 1.2)}px IBM Plex Mono, monospace`;
       ctx.textAlign = 'center';
